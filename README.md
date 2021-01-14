@@ -1,3 +1,6 @@
 # byondfunsies
+100% DM-based project to implement in DM.
 
-um projeto 100% em DM para implementar em BYOND.
+Aim:
+Fully-fledged multiplayer 2d- sidescroller-fighter with some scuffed physics (jumping, knockback.)
+
