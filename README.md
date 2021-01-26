@@ -8,7 +8,7 @@ DM is completely focused on multiplayer game development. <p>
 Dream Maker (the app for DM) has an integrated compiler, interpreter, and tools for map-making and sprite-drawing. <p>
 Dream Seeker is its client for joining the multiplayer (or downloading the singeplayer) games.<p>
 Dream Daemon is the hosting server for your games. <p>
-Yes, the names are super cool. \n
+Yes, the names are super cool. <p>
 
 Aim:<p>
 Fully-fledged multiplayer 2d-fighter with some scuffed physics (jumping, knockback.)
