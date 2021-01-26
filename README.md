@@ -13,7 +13,7 @@ Yes, the names are super cool. <p>
 Aim:<p>
 Fully-fledged multiplayer 2d-fighter with some scuffed physics (jumping, knockback.)
 
-Done so far:
+Done so far:<p>
 Simple Knockback
 -
 Attacking and damaging
