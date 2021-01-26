@@ -13,14 +13,5 @@ Yes, the names are super cool. <p>
 Aim:<p>
 Fully-fledged multiplayer 2d-fighter with some scuffed physics (jumping, knockback.)
 
-Done so far:<p>
-Simple Knockback
--
-Attacking and damaging
--
-Movement
--
-NPC AI (Stalks and attacks you with knockback)
--
-Items, item effects, item interaction.
+Done so far:<p>Simple Knockback<p>Attacking and damaging<p>Movement<p>NPC AI (Stalks and attacks you with knockback)<p>Items, item effects, item interaction.
 -
