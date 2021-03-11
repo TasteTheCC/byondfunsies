@@ -9,7 +9,7 @@ Dream Maker (the app for DM) has an integrated compiler, interpreter, and tools 
 Dream Seeker is its client for joining the multiplayer (or downloading the singeplayer) games.<p>
 Dream Daemon is the hosting server for your games. <p>
 Yes, the names are super cool. <p>
--How to play this on your own computer/host it?- <p>
+**How to play this on your own computer/host it?** <p>
 Easy. You either clone the repo, or just download the .dmb. Then you can use Dream Seeker to just play it solo, or Dream Daemon to host it before using dream seeker to play.
 
 Aim:<p>
