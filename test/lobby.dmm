@@ -2,10 +2,11 @@
 "b" = (/turf/floor,/area/dark)
 "c" = (/turf/start,/area/dark)
 "d" = (/obj/poison,/turf/floor,/area/dark)
+"e" = (/mob/Enemies/Green_bad,/turf/floor,/area/dark)
 
 (1,1,1) = {"
 aaaaaaaaaa
-abbbbbbbba
+abbbbbbbea
 abbbbbbbba
 abbbbbbbba
 abbbbbbbba

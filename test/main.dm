@@ -1,8 +1,34 @@
 /*
 	These are simple defaults for your project.
  */
-
+//colors
+#define fblack "<font color=black>"
+#define fsilver "<font color=silver>"
+#define fgray "<font color=gray>"
+#define fwhite "<font color=white>"
+#define fmaroon "<font color=maroon>"
+#define fred "<font color=red>"
+#define fpurple "<font color=purple>"
+#define ffuchsia "<font color=fuchsia>"
+#define fmagenta "<font color=magenta>"
+#define fgreen "<font color=green>"
+#define flime "<font color=lime>"
+#define folive "<font color=olive>"
+#define fgold "<font color=gold>"
+#define fyellow "<font color=yellow>"
+#define fnavy "<font color=navy>"
+#define fblue "<font color=blue>"
+#define fteal "<font color=teal>"
+#define faqua "<font color=aqua>"
+#define fcyan "<font color=cyan>"
+#define fend  "</font>"
+#define bold "<b>"
+#define bend "</b>"
+client
+	authenticate = 0
 world
+	name="fuck you"
+	mob=/mob/Player
 	fps = 25		// 25 frames per second
 	icon_size = 32	// 32x32 icon size by default
 
@@ -12,150 +38,93 @@ world
 // Make objects move 8 pixels per tick when walking
 
 mob
-	step_size = 8
+	step_size = 32
 
 obj
-	step_size = 8
+	step_size = 32
+mob
+    var
+        last_move = 0
+        move_delay = 1
+    Move(newloc,dir,step_x,step_y)
+        if(!last_move||world.time>=last_move+move_delay)
+            . = ..(newloc,dir,step_x,step_y)
+            last_move = world.time
+        else
+            return 0
 
-mob/DM
-	key = "cc233"
 //dice
 var/dice = "1d20"
 //musicas
 var/sound/peidos = sound('peidos.wav')
-// login
-mob
-	Login()
-		world << "[usr] has entered the fray!"
-//stats
-mob
-	var
-		life = 100
-		strength = 10
-		armor_class = 13
+// ----------
 mob/Stat()
-	stat("Life",life)
+	stat("Level:","[src.level]")
+	stat("EXP:","[src.Exp]/[src.Nexp]")
+	stat("Life","[src.life]/[src.maxlife]")
 	stat("Strength",strength)
-	stat("Armor Class",armor_class)
+	stat("Armor Class",defense)
 
 	statpanel("Inventory",usr.contents)
-//damage and debuffs
-mob
-	proc
-		TakeDamage(D)
-			life = life - D
-			if (life < 0)
-				world << "[src] fuckin dies."
-				src.Die()
-		MDMAPOWER(D)
-			if (usr.TakeDamage())
-				world << "[src] is speedy af!!"
-				src.icon_state = "Flight"
-				sleep (10)
-				src.icon_state = ""
-
-//MORTE
+//objects.
+obj
+	poison
+		name = "poison"
+		desc = "uh oh."
+		verb/drink()
+			set src in view(1)
+			usr.TakeDamage(25,null) //yowwwww
+			if (usr.life > 0)
+				view(5) << "[usr] has [usr.life] life left!"
+//obj
+obj/var/gettable = 1
 obj
 	corpse
+		gettable = 0
 		desc = "Someone died. Oof."
 		icon = 'corpse.dmi'
 		New()
 			icon_state = pick ("torso_f","torso_m","torso_f_fat","torso_m_fat","head_f","head_m")
-mob
-	var/corpse = /obj/corpse
-	proc/Die()
-		if (!key)
-			del src
-			new corpse(loc)
-		else
-			if(corpse)
-				new corpse(loc)
-			loc = null
-			var/again = input("Give up?") in list ("Yes","No")
-			if(again == "No")
-				Login()
-				usr.life = 100
-			else
-				del src
-				src << "OOF!"
-//objects.
-obj
-	poison
-		name = "MDMA"
-		desc = "uh oh."
-		verb/drink()
-			set src in view(1)
-			usr.TakeDamage(25) //yowwwww
-			if (usr.life > 0)
-				oview(5) << "[usr] has [usr.life] life left!"
-//verbs
-obj
-	verb
-		get()
-			set src in oview(1)
-			loc = usr
-		drop()
-			set src in usr
-			loc = usr.loc
-// social verbs
-mob
-	verb
-		smile()
-			world << "[usr] smiles."
-
-		giggle()
-			world << "[usr] giggles."
-
-		cry()
-			world << "[usr] cries \his heart out."
-
-		rename(name as text)
-			set desc = "(\"new name!!\") change yer fookin name."
-			src.name = name
-
-		play_something(snd as sound)
-			world << snd
-
-		cona()
-			view() << 'peidos.wav'
-
-		rolldice()
-			var/d = roll(dice)
-			world << "[usr] rolled a [d]!"
-//communication
-mob
-	verb
-		say(msg as text)
-			world << "[usr] says, '[msg]'"
-		whisper(msg as text)
-			src in view()
-			src << "[usr] whispers, '[msg]'"
-
+	dust
+		icon = 'dirt.dmi'
+		density = 0
+		gettable = 0
+		New()
+			walk(src,pick(NORTH,EAST,WEST,SOUTH),6)
+			spawn(10)
+				del(src)
 // defining space.
 area/dark
 	luminosity = 10
 turf
 	floor
-		icon = 'floors.dmi'
+	icon = 'floors.dmi'
 	start
-		icon = 'floors.dmi'
 		icon_state = "bcircuit"
 	wall
 		icon = 'walls.dmi'
 		density = 1
+		opacity = 1
 obj
 	poison
 		icon = 'drinks.dmi'
 		icon_state = "lithiumflask"
-// defining mob icon
-mob
+
+//login/logout
+mob/Player
 	icon = 'player.dmi'
+
+mob
 	Login()
-		if(loc)
+		if(src.LoadProc())
 			usr << "Welcome back, [name]."
+			src.life = 100
 		else
 			usr << "Welcome, [name]!"
 			loc = locate(/turf/start)
-		..()
+			src.life = 100
+
 	Logout()
+		world<<"[src] has left the building."
+		src.SaveProc()
 		del src

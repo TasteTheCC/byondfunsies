@@ -17,7 +17,12 @@
 // END_PREFERENCES
 
 // BEGIN_INCLUDE
+#include "Enemies.dm"
 #include "main.dm"
+#include "Procs.dm"
+#include "Save.dm"
+#include "Vars.dm"
+#include "Verbs.dm"
 #include "lobby.dmm"
 // END_INCLUDE
 
