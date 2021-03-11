@@ -13,5 +13,5 @@ Yes, the names are super cool. <p>
 Aim:<p>
 Fully-fledged multiplayer 2d-fighter with some scuffed physics (jumping, knockback.)
 
-Done so far:<p>Simple Knockback<p>Attacking and damaging<p>Movement<p>NPC AI (Stalks and attacks you with knockback)<p>Items, item effects, item interaction.
+Done so far:<p>Simple Knockback<p>Attacking and damaging<p>Movement<p>NPC AI (Stalks and attacks you with knockback)<p>Items, item effects, item interaction.<p>Dungeons & Dragons stat system<p>Dungeons & Dragons attack mechanics, with advantages/disadvantages, critical hits. (still not turn-based. might never be.)
 -
