@@ -1,0 +1,40 @@
+"a" = (/turf/wall,/area)
+"b" = (/turf/floor,/area/dark)
+"c" = (/turf/wall,/area/dark)
+"d" = (/turf/floor_creepy,/area/dark)
+"e" = (/turf/start,/area/dark)
+"f" = (/turf/door,/area/dark)
+"g" = (/mob/Enemies/Green_bad,/turf/floor_creepy,/area/dark)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+addddddddcbbbbbbbbbbbbbbbbbbba
+adgggggddcbbcccccbbbbbbbbbbbba
+adgggggddcbbcbbbcbbbbbbbbbbbba
+adgggggddcbbcbbbcbbbbbbbbbbbba
+adgggggddcbbcbbbcbbbbbbbbbbbba
+adgggggddcbbcbbbcbbbbbbbbbbbba
+addddddddccccbbbcbbbbbbbbbbbba
+addddddddfbbbbbbcbbbbbbbbbbbba
+acccccccccbbbbbbcbbbbbbbbbbbba
+abbbbbbbbbbccccccbbbbbbbbbbbba
+abbbccccccccbbbbbbbbbbbbbbbbba
+abbbcbbbbbbbbbbbbbbbbbbbbbbbba
+abbbcbbbbbbbbbbbbbbbbbbbbbbbba
+abbbcbbbbbbbbbbbbbbbbbbbbbbbba
+abbbcbbbbbbbbbbbbbbbbbbbbbbbba
+abbbcccccccccccccbbbbbbbbbbbba
+abbbbbbbbbbbbbbbcbbbbbbbbbbbba
+abbbbbbbbbbbbbbbcbbbbbbbbbbbba
+abbbbbbbbbbbbbbbcbbbbbbbbbbbba
+abbbbbbbbbbbbbbbcbbbbbbbbbbbba
+abcccccccccccccccbbbbbbbbbbbba
+abcbbbcbbbbbbbbbbbbbbbbbbbbbba
+abcbcbcbcbbbbbbbbbbbbbbbbbbbba
+abcbcbcbcbbbbbbbbbbbbbbbbbbbba
+abcbcbcbcbbbbbbbbbbbbbbbbbbbba
+abcbcbcbcbbbbbbbbbbbbbbbbbbbba
+abcbcbcbcbbbbbbbbbbbbbbbbbbbba
+abbbcbbbcbbbbbbbbbbbbbbbbbbbea
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

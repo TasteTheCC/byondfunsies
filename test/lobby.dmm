@@ -1,4 +1,4 @@
-"a" = (/turf/wall,/area)
+"a" = (/obj/wall/wall,/area)
 "b" = (/turf/floor,/area/dark)
 "c" = (/turf/start,/area/dark)
 "d" = (/obj/poison,/turf/floor,/area/dark)

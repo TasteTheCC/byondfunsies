@@ -1,0 +1,18 @@
+"a" = (/turf/wall,/area)
+"b" = (/turf/floor,/area/dark)
+"c" = (/turf/start,/area/dark)
+"d" = (/obj/poison,/turf/floor,/area/dark)
+"e" = (/mob/Enemies/Green_bad,/turf/floor,/area/dark)
+
+(1,1,1) = {"
+aaaaaaaaaa
+abbbbbbbea
+abbbbbbbba
+abbbbbbbba
+abbbbbbbba
+abbbcdbbba
+abbbbbbbba
+abbbbbbbba
+abbbbbbbba
+aaaaaaaaaa
+"}

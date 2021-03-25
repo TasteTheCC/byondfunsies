@@ -1,9 +1,8 @@
 mob
 	Enemies
 		Green_bad
-			icon = 'Green_bad.dmi'
-			level = 1
-			Exp = 5
+			icon = 'human_female_white_kid.dmi'
+			pl = 300
 			maxlife = 100
 			strength = 10
 			defense = 5
