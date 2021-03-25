@@ -101,15 +101,8 @@ mob
 			set category = "Combat"
 			stamcheck()
 			if(src.energy <= 0) return
-			var/strmod=(src.strength-10)-2
+			var/Damage = src.strength - src.defense
 			var/wait = 30 - (src.speed/4)
-			var/AttackRoll1 = roll(20) + strmod
-			var/AttackRoll2 = roll(20) + strmod
-			var/AttackRoll = max(AttackRoll1,AttackRoll2)
-			var/isCrit = 0
-			var/CritModifier = 1
-			var/Unarmeddamage = roll(src.unarmed)
-			var/Damage=(Unarmeddamage + strmod)
 			for(var/obj/wall/M in get_step(src,src.dir))
 				if (src.ko == 1)
 					break
@@ -134,24 +127,13 @@ mob
 				else
 					src.plgain()
 					flick(pick("RPunch","RKick","LPunch","LKick"),src)
-					if (AttackRoll == 20)
-						view(M) << "[fgreen][bold]CRITICAL HIT![fend][bend]"
-						isCrit = 1
-						CritModifier = 2
-					if (M.disadvantage == 1 || src.advantage == 1)
-						view(M) << "[src] rolls for attack (1d20):[AttackRoll1] and [AttackRoll2] -> [bold][AttackRoll][bend]"
-					else
-						AttackRoll = AttackRoll1
-						view(M) << "[src] rolls for attack (1d20):[bold][AttackRoll][bend]"
-					if (AttackRoll >= M.defense)
-						if (isCrit == 1) Damage = CritModifier*Unarmeddamage + strmod
-						view(M)<<"[M] AC: [bold][M.defense][bend]"
-						view(M)<<"[src] hit [M] successfully for 1d[src.unarmed]([bold][Unarmeddamage][bend]) x [bold][CritModifier][bend] ([fred][Damage - strmod][fend])+ Str Mod([bold][strmod][bend]) : [bold][Damage][bend] Damage!"
+					if (Damage >= 1)
+						view(M)<<"[src] hit [M] for [bold][Damage][bend] Damage!"
+						flick("Block",M)
 						M.TakeDamage(Damage,src)
-						DisadCheck(Damage,M)
 					else
 						flick("Block",M)
-						view(M) << "[src] misses the attack! (Enemy AC: [bold][M.defense][bend])"
+						view(M) << "[M] dodges the attack!"
 						break
 				 src.canattack = 0
 		Train()
