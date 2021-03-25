@@ -77,7 +77,7 @@ mob
 				dir = d
 				step(src, dir)
 				r--
-				new/obj/dust(loc,dir)
+				new/obj/dust(src.loc,src.dir)
 					..()
 				sleep(1)
 			if(/mob)
