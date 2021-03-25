@@ -83,7 +83,7 @@ mob
 			if(/mob)
 				dir=turn(dir,180)
 			if(Bump(null))
-				returns
+				return
 			if(Bump(/obj/wall))
 				new/obj/dust(src.loc,src.dir)
 				new/obj/dust(src.loc,src.dir)
