@@ -96,7 +96,7 @@ mob/proc/spawncorpse()
 	S.icon = src.icon
 	flick("Fall",S)
 	S.gettable= 0
-	S.desc = "[src]'s corpse. May \he rest in peace"
+	S.desc = "[src]'s corpse. May \he rest in peace."
 	S.name = "[src]'s corpse"
 
 obj/wall
