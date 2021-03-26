@@ -1,0 +1,21 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "dreammaker",
+			"dme": "test.dme",
+			"problemMatcher": [
+				"$dreammaker"
+			],
+			"group": "build",
+			"label": "dm: build - test.dme"
+		},
+		{
+			"label": "Run Test Server",
+			"group": "test",
+			"command": "/usr/local/byond/bin/DreamDaemon",				"args" : ["${workspaceRoot}/test/test.dmb","-invisible","-trusted"]
+		}
+	]
+}
+
+
