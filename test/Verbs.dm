@@ -99,10 +99,10 @@ mob
 			src << "Wall HP: [A.durability]"
 		Melee_Attack()
 			set category = "Combat"
+			var/wait = 30 - (src.speed/4)
 			stamcheck()
 			if(src.energy <= 0) return
-			var/Damage = src.strength - src.defense
-			var/wait = 30 - (src.speed/4)
+			var/DamageW = src.strength
 			for(var/obj/wall/M in get_step(src,src.dir))
 				if (src.ko == 1)
 					break
@@ -110,22 +110,25 @@ mob
 					sleep(wait)
 					src.canattack = 1
 					break
-				if (Damage <= 0) break
-				M.Decheck(Damage)
+				if (DamageW <= 0) break
+				M.Decheck(DamageW)
 				src.canattack = 0
 				flick(pick("RPunch","RKick","LPunch","LKick"),src)
 				src.plgain()
 			for(var/mob/M in get_step(src,src.dir))
+				var/Damage = DamageW - M.defense
 				KillCheck(M)
+				if (M == src) break;
 				if (src.ko == 1)
 					break
 				if (src.canattack == 0)
 					sleep(wait)
 					src.canattack = 1
 					break
-				if (M == src) break;
 				else
 					src.plgain()
+					M.training = 0
+					M.meditating = 0
 					flick(pick("RPunch","RKick","LPunch","LKick"),src)
 					if (Damage >= 1)
 						view(M)<<"[src] hit [M] for [bold][Damage][bend] Damage!"

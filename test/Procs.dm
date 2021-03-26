@@ -13,7 +13,6 @@ mob
 				spawn() src.knockback(knockback, dir)
 				flick("Block",src)
 				src.isknockback = 1
-				DisadvantageRegulator(src)
 			if(src.isknockback >= 1)
 				sleep(knockback)
 				src.isknockback = 0
@@ -51,20 +50,6 @@ mob
 					if("No")
 						view() << "[src] gave mercy on [M]"
 						M.loc = M.loc
-		DisadCheck(var/Damage,var/mob/M)
-			if (M == null || src == null)
-				return
-			if (M.disadvantage == 0 && Damage >= (2 * M.defense))
-				view(M) << "[M] got hit for [bold] DOUBLE [bend] their AC! They're stunned and will hit/defend with disadvantage!"
-				M.disadvantage = 1
-			else M.disadvantage = 1
-		DisadvantageRegulator()
-			if (src == null)
-				return
-			if (src.disadvantage == 1)
-				sleep(3)
-				src.disadvantage = 0
-
 		DeathCheck(var/mob/Killer)
 			if(src.life<=0)
 				KO(src)

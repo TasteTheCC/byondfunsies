@@ -85,10 +85,10 @@ mob
 			return ..()
 		return 0
 	Bump(obj/wall/M)
-		if(isknockback==1)
-			new/obj/turf/floor_destroyed(M.loc)
-			new/obj/crater(M.loc)
-			new/obj/dust(M.loc,M.dir)
+		if(isknockback==1 && M!=null)
+			new/obj/turf/floor_destroyed(src.loc)
+			new/obj/crater(src.loc)
+			new/obj/dust(src.loc,src.dir)
 			del(M)
 
 // ----------
@@ -186,6 +186,9 @@ obj/wall
 			sleep (20)
 			opacity = 1
 			density = 1
+		Click()
+			Open()
+			sleep(20)
 obj
 	poison
 		icon = 'drinks.dmi'
