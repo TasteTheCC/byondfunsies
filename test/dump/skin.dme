@@ -1,0 +1,36 @@
+// DM environment file for Dragonn.DBF: skin.dme
+
+// BEGIN_INTERNALS
+// END_INTERNALS
+
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+
+// BEGIN_INCLUDE
+#include "Absorb Stuff.dm"
+#include "Admin.dm"
+#include "Aging.dm"
+#include "BattleStuff.dm"
+#include "Communications.dm"
+#include "DemonStuff.dm"
+#include "Items.dm"
+#include "KiAttacks.dm"
+#include "KiSkills.dm"
+#include "Login.dm"
+#include "Makyo Star.dm"
+#include "MapStuff.dm"
+#include "MobStuff.dm"
+#include "Multi-Passenger Spaceship.dm"
+#include "Ranks.dm"
+#include "Shops.dm"
+#include "StatStuff.dm"
+#include "TechStuff.dm"
+#include "Training Stuff.dm"
+#include "Transformations.dm"
+#include "Window.dm"
+#include "Skin.dmf"
+// END_INCLUDE
+
+// BEGIN_PREFERENCES
+// END_PREFERENCES

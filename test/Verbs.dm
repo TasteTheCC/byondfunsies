@@ -7,6 +7,21 @@ mob
 			if(src.ckey == "cc233")
 				world.Repop()
 			else src << "No."
+		Reset_Stats(var/mob/Player/M in world)
+			set category = "Admin"
+			if (src.ckey == "cc233")
+				rating = 1
+				M.strength = 1
+				defense = 1
+				force = 1
+				resistance = 1
+				speed = 20
+				strengthmod = 1.5
+				defensemod = 2.5
+				forcemod = 3
+				resmod = 3
+				lift = 0
+			else src << "No."
 // social verbs
 mob
 	verb
@@ -78,7 +93,6 @@ mob
 
 mob/verb/Variable_Edit(atom/A in world, edit as text)
     var/list/variables = A.vars - list("ckey", "contents", "loc", "locs", "key","parent_type","type")  //  I'm subtracting out any forbidden variables as changing these itself directly can have VERY serious consequences
-
     if(!variables.Find(edit)){ alert("Variable [edit] does not exist."); return}
     else if(istype(A.vars[edit], /list)){ alert("Cannot edit [edit] as it is a /list"); return}
 
@@ -93,52 +107,67 @@ mob/verb/Variable_Edit(atom/A in world, edit as text)
     alert({"Changed [edit] to [A.vars[edit]] ([isnum(A.vars[edit])?"Numeric":"Text"])"}, "Edit [edit]")
 
 //combat?
+var/mob/iswaiting
 mob
 	verb
-		Check_Wall_Life(obj/wall/A in view(usr))
-			src << "Wall HP: [A.durability]"
+		Check_Structure_Life(obj/destructable/A in view(usr))
+			src << "Structure HP: [A.durability]"
 		Melee_Attack()
 			set category = "Combat"
 			var/wait = 30 - (src.speed/4)
 			stamcheck()
-			if(src.energy <= 0) return
-			var/DamageW = src.strength
-			for(var/obj/wall/M in get_step(src,src.dir))
-				if (src.ko == 1)
-					break
-				if (src.canattack == 0)
-					sleep(wait)
-					src.canattack = 1
-					break
-				if (DamageW <= 0) break
-				M.Decheck(DamageW)
+			var/DamageW = src.maxpl
+			if(src.canattack == 1)
 				src.canattack = 0
-				flick(pick("RPunch","RKick","LPunch","LKick"),src)
-				src.plgain()
-			for(var/mob/M in get_step(src,src.dir))
-				var/Damage = DamageW - M.defense
-				KillCheck(M)
-				if (M == src) break;
-				if (src.ko == 1)
-					break
-				if (src.canattack == 0)
-					sleep(wait)
-					src.canattack = 1
-					break
-				else
-					src.plgain()
-					M.training = 0
-					M.meditating = 0
-					flick(pick("RPunch","RKick","LPunch","LKick"),src)
-					if (Damage >= 1)
-						view(M)<<"[src] hit [M] for [bold][Damage][bend] Damage!"
-						flick("Block",M)
-						M.TakeDamage(Damage,src)
+				src.incombat = 1
+				for(var/obj/destructable/M in get_step(src,src.dir))
+					if(energy <= 0) break
+					if(iswaiting) break
 					else
-						flick("Block",M)
-						view(M) << "[M] dodges the attack!"
+						if (src.ko == 1)
+							break
+						if (DamageW <= 0) break
+						flick(pick("RPunch","RKick","LPunch","LKick"),src)
+						M.Decheck(DamageW)
+						src.canattack = 0
+						src.plgain(1.5)
+						src.speedgain(0.5)
+						src.energy -= round(maxenergy/10)
 						break
-				 src.canattack = 0
+					src.canattack = 0
+					break
+				for(var/mob/M in get_step(src,src.dir))
+					if (energy <= 0) break
+					var/Damage = src.strength - M.defense
+					if(iswaiting) break
+					else
+						KillCheck(M)
+						if (M == src) break;
+						else
+							if (src.ko == 1)
+								break
+							src.plgain(3)
+							src.speedgain(1)
+							M.training = 0
+							M.meditating = 0
+							src.energy -= round(maxenergy/10)
+							flick(pick("RPunch","RKick","LPunch","LKick"),src)
+							if (Damage >= 1)
+								view(M)<<"[src] hit [M] for [bold][Damage][bend] Damage!"
+								flick("Block",M)
+								M.TakeDamage(Damage,src)
+							else
+								flick("Block",M)
+								view(M) << "[M] dodges the attack!"
+					break
+				iswaiting = 1
+				src.canattack = 0
+				sleep(wait)
+				src.canattack = 1
+				iswaiting = 0
+				spawn(100)
+					src.incombat=0
+
 		Train()
 			set category = "Training"
 			if(src.meditating!=0)

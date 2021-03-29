@@ -8,10 +8,12 @@
 // BEGIN_FILE_DIR
 #define FILE_DIR .
 #define FILE_DIR "armors"
+#define FILE_DIR "attacks"
 #define FILE_DIR "clothes"
 #define FILE_DIR "dbg"
 #define FILE_DIR "dbg/bases"
 #define FILE_DIR "dbg/hairs"
+#define FILE_DIR "dump"
 #define FILE_DIR "hairs"
 #define FILE_DIR "icons"
 #define FILE_DIR "obj"
@@ -23,8 +25,11 @@
 // END_PREFERENCES
 
 // BEGIN_INCLUDE
+#include "Aging.dm"
 #include "Enemies.dm"
+#include "Items.dm"
 #include "main.dm"
+#include "MapStuff.dm"
 #include "Procs.dm"
 #include "Save.dm"
 #include "Vars.dm"

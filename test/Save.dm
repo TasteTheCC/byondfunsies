@@ -16,6 +16,19 @@ mob/proc/SaveProc()
     F["LastX"]<<src.x
     F["LastY"]<<src.y
     F["LastZ"]<<src.z
+    F["Lift"]<<src.lift
+    F["Dead"]<<src.dead
+    F["Age"]<<src.Age
+    F["Body Age"]<<src.Body
+    F["Decline"]<<src.DeclineAge
+    F["Incline"]<<src.InclineAge
+    F["Hunger"]<<src.hunger
+    F["Thirst"]<<src.thirst
+    F["Tiredness"]<<src.tired
+    F["HairR"]<<src.HairR
+    F["HairG"]<<src.HairG
+    F["HairB"]<<src.HairB
+    F["QP"]<<src.techskill
     src<<"Character Saved!"
 
 mob/proc/LoadProc()
@@ -33,7 +46,21 @@ mob/proc/LoadProc()
         F["Hair"]>>src.hair
         F["Speed"]>>src.speed
         F["Max Energy"]>>src.maxenergy
+        F["Lift"]>>src.lift
+        F["Dead"]>>src.dead
+        F["Age"]>>src.Age
+        F["Body Age"]>>src.Body
+        F["Decline"]>>src.DeclineAge
+        F["Incline"]>>src.InclineAge
+        F["Hunger"]>>src.hunger
+        F["Thirst"]>>src.thirst
+        F["Tiredness"]>>src.tired
+        F["HairR"]>>src.HairR
+        F["HairG"]>>src.HairG
+        F["HairB"]>>src.HairB
+        F["QP"]>>src.techskill
         src.overlays += src.hair
+        src.hair += rgb(HairR,HairG,HairB)
         src.loc=locate(F["LastX"],F["LastY"],F["LastZ"])
         src<<"Character Loaded..."
         return 1

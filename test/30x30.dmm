@@ -1,10 +1,13 @@
-"a" = (/obj/wall/wall,/area)
+"a" = (/obj/destructable/wall,/turf,/area)
 "b" = (/turf/floor,/area/dark)
-"c" = (/obj/wall/wall,/area/dark)
+"c" = (/obj/destructable/wall,/turf,/area/dark)
 "d" = (/turf/floor_creepy,/area/dark)
 "e" = (/turf/start,/area/dark)
-"f" = (/obj/wall/door,/area/dark)
-"g" = (/mob/Enemies/Green_bad,/turf/floor_creepy,/area/dark)
+"f" = (/obj/destructable/door,/turf,/area/dark)
+"g" = (/mob/Enemies/Evil_Kid,/turf/floor_creepy,/area/dark)
+"h" = (/mob/Punching_Bag,/turf/floor,/area/dark)
+"i" = (/obj/destructable/bedbot,/turf/floor,/area/dark)
+"j" = (/obj/destructable/bed,/turf/floor,/area/dark)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -25,12 +28,12 @@ abbbcbbbbbbbbbbbbbbbbbbbbbbbba
 abbbcbbbbbbbbbbbbbbbbbbbbbbbba
 abbbcccccccccccccbbbbbbbbbbbba
 abbbbbbbbbbbbbbbcbbbbbbbbbbbba
-abbbbbbbbbbbbbbbcbbbbbbbbbbbba
+abbbbbbbbbbbbbbbcbbbbbbbbbbbha
 abbbbbbbbbbbbbbbcbbbbbbbbbbbba
 abbbbbbbbbbbbbbbcbbbbbbbbbbbba
 abcccccccccccccccbbbbbbbbbbbba
-abcbbbcbbbbbbbbbbbbbbbbbbbbbba
-abcbcbcbcbbbbbbbbbbbbbbbbbbbba
+abcbbbcbbbbbbbbbbbbbbbbbbbbbja
+abcbcbcbcbbbbbbbbbbbbbbbbbbbia
 abcbcbcbcbbbbbbbbbbbbbbbbbbbba
 abcbcbcbcbbbbbbbbbbbbbbbbbbbba
 abcbcbcbcbbbbbbbbbbbbbbbbbbbba

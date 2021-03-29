@@ -1,10 +1,10 @@
-"a" = (/turf/wall,/area)
+"a" = (/obj/wall/wall,/area)
 "b" = (/turf/floor,/area/dark)
-"c" = (/turf/wall,/area/dark)
+"c" = (/obj/wall/wall,/area/dark)
 "d" = (/turf/floor_creepy,/area/dark)
 "e" = (/turf/start,/area/dark)
-"f" = (/turf/door,/area/dark)
-"g" = (/mob/Enemies/Green_bad,/turf/floor_creepy,/area/dark)
+"f" = (/obj/wall/door,/area/dark)
+"g" = (/mob/Enemies/Evil_Kid,/turf/floor_creepy,/area/dark)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

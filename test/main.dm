@@ -28,6 +28,27 @@
 #include "lobby.dmm"
 client
 	authenticate = 0
+mob
+	proc
+		LifeCheck()
+			set background = 1
+			var/hasticked=0
+			if(hasticked==1)
+				return
+			else
+				if(src.dead==0)
+					if(src.loc != /obj/destructable/bed)
+						src.tired-=0.005
+					src.hunger-=0.05
+					src.thirst-=0.05
+					hasticked=1
+				spawn(rand(5,10))
+					hasticked = 0
+					LifeCheck()
+				if(energy <= maxenergy && !incombat)
+					energy+=maxenergy/20
+
+var/savingmap
 world
 	name="fuck you"
 	mob=/mob/Player
@@ -35,8 +56,29 @@ world
 	icon_size = 32	// 32x32 icon size by default
 
 	view = 6		// show up to 6 tiles outward from center (13x13 view)
-
-
+	..()
+	New()
+		..()
+		spawn Initialize()
+proc/Initialize()
+	world<<"Loading all files..."
+	LoadYear()
+	Load_Gain()
+	spawn Years()
+	spawn SaveWorldRepeat()
+	world << "All files loaded."
+proc/SaveWorldRepeat()
+	sleep(36000)
+	savingmap=1
+	spawn SaveWorld()
+	savingmap=0
+	SaveWorldRepeat()
+proc/SaveWorld()
+	world << "Saving all files."
+	SaveYear()
+	Save_Gain()
+	world<<"Year saved."
+	world<<"Complete"
 // Make objects move 8 pixels per tick when walking
 
 var/const
@@ -84,7 +126,7 @@ mob
 		if(src.can_move==1)
 			return ..()
 		return 0
-	Bump(obj/wall/M)
+	Bump(obj/destructable/M)
 		if(isknockback==1 && M!=null)
 			new/obj/turf/floor_destroyed(src.loc)
 			new/obj/crater(src.loc)
@@ -93,20 +135,21 @@ mob
 
 // ----------
 mob/Stat()
-	stat("Rating","[src.rating]")
+	stat("Rating([src.rating])","[round(src.rating)]")
 	stat("Power", "[src.pl_percent()]%")
 	stat("Energy","[src.energy_percent()]%")
 	stat("Vitals","[src.hp_percent()]%")
-	stat("Strength", "[measure(create_percent("strength"))]")
-	stat("Endurance", "[measure(create_percent("defense"))]")
-	stat("Force","[measure(create_percent("force"))]")
-	stat("Resistance","[measure(create_percent("resistance"))]")
-	stat("Speed","[measure(create_percent("speed"))]")
-	stat("Lift","[src.lift]")
+	stat("Age", "[round(src.Age,0.1)]([round(src.Body,0.1)]) years old.")
+	stat("Strength, ([src.strength])", "[measure(create_percent("strength"))]")
+	stat("Endurance,([src.defense])", "[measure(create_percent("defense"))]")
+	stat("Force, ([src.force])","[measure(create_percent("force"))]")
+	stat("Resistance, ([src.resistance])","[measure(create_percent("resistance"))]")
+	stat("Speed, ([src.speed])","[measure(create_percent("speed"))]")
+	stat("Lift","[round(src.lift,0.01)]")
 	stat("================","==============================")
-	stat("Hunger:","[src.hunger]%")
-	stat("Thirst:","[src.thirst]%")
-	stat("Tiredness:","[src.tired]%")
+	stat("Hunger:","[round(src.hunger)]%")
+	stat("Thirst:","[round(src.thirst)]%")
+	stat("Tiredness:","[round(src.tired)]%")
 	statpanel("Inventory",usr.contents)
 //objects.
 obj
@@ -142,11 +185,13 @@ obj
 		icon = 'dirt.dmi'
 		icon_state = "small crater"
 		density = 0
+		opacity=1
 		gettable = 0
 		New()
 			sleep(30)
 			del(src)
-
+	attack
+		blast
 // defining space.
 area/dark
 	luminosity = 10
@@ -164,8 +209,9 @@ obj/turf
 		density = 0
 		icon_state = "asteroid"
 		var/durability = 50
-obj/wall
-	var/durability = 100
+obj/destructable
+	var/maxdurability = 10000
+	var/durability = 10000
 	wall
 		icon = 'walls.dmi'
 		desc = "It's a wall."
@@ -189,6 +235,22 @@ obj/wall
 		Click()
 			Open()
 			sleep(20)
+	bed
+		icon = 'Turf 52.dmi'
+		icon_state = "bed top"
+		density = 0
+		Entered(var/mob/Player/M)
+			M.inbed=1
+		Exited(var/mob/Player/M)
+			M.inbed=0
+
+	bedbot
+		icon = 'Turf 52.dmi'
+		icon_state = "bed"
+		density = 1
+		New()
+			..()
+			new/obj/destructable/bed(NORTH)
 obj
 	poison
 		icon = 'drinks.dmi'
@@ -208,6 +270,9 @@ mob
 			src.life = src.maxlife
 			src.energy = src.maxenergy
 			src.pl = src.maxpl
+		src.player = 1
+		src.LifeCheck()
+		src.AgeCheck()
 
 	Logout()
 		world<<"[src] has left the building."

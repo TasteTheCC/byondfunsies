@@ -1,16 +1,18 @@
 //stats
+var/globalgain = 0.001
 mob
 	var
 		//indicators
 		gains = 1
-		globalgain = 1
+		plmod = 1.25
 		pl = 100
 		maxpl = 100
 		rating = 0
-		life = 100
-		maxlife = 100
+		life = 5000
+		maxlife = 5000
 		energy = 40
 		maxenergy = 40
+		recordpl = 1200
 		//stats
 		strength = 10
 		defense = 13
@@ -21,15 +23,37 @@ mob
 		defensemod = 2.5
 		forcemod = 3
 		resmod = 3
+		speedmod = 1
 		lift = 5
+		techskill=1
 		//quality of life
 		hunger = 100
 		thirst = 100
 		tired = 100
+		Age = 4
+		Body = 4
+		SAge = 0
+		AgeStatus = "Young"
+		DeclineAge = 40
+		InclineAge = 25
 		//dice
 		unarmed = 4
 		//flags
+		dead = 0
+		immortal = 0
+		inbed= 0
+		incombat = 0
+		flight=0
+		inpod=0
+		insuit=0
+		grabbee=0
+		Race = null
+		EnteredHBTC = 0
 		isknockback = 0
+		buudead = 0
+		mystified = 0
+		enslaved = 0
+		player = 0
 		disadvantage = 0
 		advantage = 0
 		canattack = 1
@@ -40,6 +64,9 @@ mob
 		meditating = 0
 		//cosmetic
 		hair = null
+		HairR=0
+		HairG=0
+		HairB=0
 
 	proc
 		create_percent(percent)
